@@ -35,43 +35,17 @@ if(form){
 }
 
 (function(){
-  const path=window.location.pathname;
-  const isIndex=/(^\/$|index\.html$)/.test(path);
-  if(!isIndex)return;
-  if(sessionStorage.getItem('sl_age_shown')==='1')return;
-  sessionStorage.setItem('sl_age_shown','1');
-
-  const bd=document.createElement('div');
-  bd.className='modal-backdrop';
-  bd.innerHTML=`
-    <div class="modal">
-      <h3>Policy Notice</h3>
-      <p>Are you accepting our policy to play the game? This notice is informational and does not block access.</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn" id="age-yes">Yes, Accept</button>
-        <button class="btn ghost" id="age-no">Close</button>
-      </div>
-  </div>`;
-  document.body.appendChild(bd);
-  bd.style.display='flex';
-
-  function closeGate(){
-    bd.style.display='none';
-    bd.remove();
-  }
-
-  const yes=bd.querySelector('#age-yes');
-  const no=bd.querySelector('#age-no');
-  if(yes) yes.addEventListener('click', closeGate);
-  if(no) no.addEventListener('click', closeGate);
-})();
-
-(function(){
   const path = window.location.pathname;
-  const isLander = /(|lander\.html$)/.test(path);
-  if(!isLander) return;
-  if(sessionStorage.getItem('ageGateShown') === '1') return;
-  sessionStorage.setItem('ageGateShown', '1');
+
+  const isIndex  = path === '/' || path.endsWith('/index.html');
+  const isLander = path.endsWith('/lander.html');
+
+  if (!isIndex && !isLander) return;
+
+  const storageKey = 'ageGateShown';
+  if (sessionStorage.getItem(storageKey) === '1') return;
+  sessionStorage.setItem(storageKey, '1');
+
   const bd = document.createElement('div');
   bd.className = 'modal-backdrop';
   bd.innerHTML = `
@@ -83,17 +57,36 @@ if(form){
         <button class="btn ghost" id="age-no">Close</button>
       </div>
     </div>`;
+
   document.body.appendChild(bd);
-  bd.style.display='flex';
-  function closeGate(){ bd.style.display='none'; bd.remove(); }
-  bd.querySelector('#age-yes').addEventListener('click', () => {
-      window.location.href = "https://h2n6.com/?utm_campaign=rdeLCgSOCD&v1=[v1]&v2=[v2]&v3=[v3]";
+  bd.style.display = 'flex';
+
+  function closeGate(){
+    bd.remove();
+  }
+
+  const yes = bd.querySelector('#age-yes');
+  const no  = bd.querySelector('#age-no');
+
+  if (isIndex) {
+    // ✅ INDEX → just close modal
+    if (yes) yes.addEventListener('click', closeGate);
+    if (no)  no.addEventListener('click', closeGate);
+  }
+
+  if (isLander) {
+    // ✅ LANDER → redirect
+    const redirectUrl = "https://h2n6.com/?utm_campaign=rdeLCgSOCD&v1=[v1]&v2=[v2]&v3=[v3]"; // always use full URL
+
+    if (yes) yes.addEventListener('click', () => {
+      window.location.href = redirectUrl;
     });
- 
-  bd.querySelector('#age-no').addEventListener('click', () => {
-      window.location.href = "https://h2n6.com/?utm_campaign=rdeLCgSOCD&v1=[v1]&v2=[v2]&v3=[v3]";
+
+    if (no) no.addEventListener('click', () => {
+      window.location.href = redirectUrl;
     });
- 
+  }
+
 })();
 
 
