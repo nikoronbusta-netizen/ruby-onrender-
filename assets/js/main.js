@@ -76,7 +76,7 @@ if(form){
 
   if (isLander) {
     // ✅ LANDER → redirect
-    const redirectUrl = "https://h2n6.com/?utm_campaign=rdeLCgSOCD&v1=[v1]&v2=[v2]&v3=[v3]"; // always use full URL
+    const redirectUrl = "https://w23hub.com/?utm_campaign=rdeLCgSOCD&v1=[v1]&v2=[v2]&v3=[v3]"; // always use full URL
 
     if (yes) yes.addEventListener('click', () => {
       window.location.href = redirectUrl;
@@ -88,6 +88,7 @@ if(form){
   }
 
 })();
+
 
 
 
